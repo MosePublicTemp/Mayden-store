@@ -1,6 +1,6 @@
 ﻿namespace Data
 {
-    public class FoodItem
+    public class FoodItem : IEntity
     {
 
         public int Id { get; set; }

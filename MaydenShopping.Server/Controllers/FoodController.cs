@@ -6,7 +6,7 @@ namespace MaydenShopping.Server.Controllers
     {
 
         /*[HttpGet("{id}")]
-        public IActionResult getFoodItem([FromRoute] Guid id, CancellationToken token = default)
+        public IActionResult getFoodItem([FromRoute] int id, CancellationToken token = default)
         {
 
         }
