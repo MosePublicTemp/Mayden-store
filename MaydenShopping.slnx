@@ -1,7 +1,10 @@
 <Solution>
+  <Project Path="Data/Data.csproj" Id="ad6dde21-0bb0-4838-8579-afaa502f78b4" />
   <Project Path="maydenshopping.client/maydenshopping.client.esproj">
     <Build />
     <Deploy />
   </Project>
   <Project Path="MaydenShopping.Server/MaydenShopping.Server.csproj" />
+  <Project Path="Models/Models.csproj" Id="2237e882-243d-4e8c-81cb-c45c24a7bea8" />
+  <Project Path="Service/Service.csproj" Id="1e600496-9a21-41b2-b004-df90e2cd6021" />
 </Solution>

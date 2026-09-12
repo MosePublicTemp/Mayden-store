@@ -5,7 +5,7 @@ namespace MaydenShopping.Server.Controllers
     public class FoodController
     {
 
-        [HttpGet("{id}")]
+        /*[HttpGet("{id}")]
         public IActionResult getFoodItem([FromRoute] Guid id, CancellationToken token = default)
         {
 
@@ -15,7 +15,7 @@ namespace MaydenShopping.Server.Controllers
         public IActionResult getFoodItems(CancellationToken token = default)
         {
 
-        }
+        }*/
         
     }
 }
