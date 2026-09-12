@@ -1,0 +1,6 @@
+*/bin
+maydenshopping.client/.vscode
+maydenshopping.client/node_modules
+*/obj/*
+.vs/*
+

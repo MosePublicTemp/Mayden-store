@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="maydenshopping.client/maydenshopping.client.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+  <Project Path="MaydenShopping.Server/MaydenShopping.Server.csproj" />
+</Solution>

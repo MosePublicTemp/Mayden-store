@@ -1,0 +1,6 @@
+@MaydenShopping.Server_HostAddress = http://localhost:5202
+
+GET {{MaydenShopping.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
