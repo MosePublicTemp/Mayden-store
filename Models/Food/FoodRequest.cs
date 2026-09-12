@@ -1,6 +1,6 @@
-﻿namespace Models
+﻿namespace Models.Food
 {
-    public class Class1
+    public class FoodRequest
     {
 
     }
