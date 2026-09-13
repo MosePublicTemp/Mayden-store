@@ -1,7 +1,8 @@
 ﻿import "./App.css";
+import ShoppingRoutes from "./ShoppingRoutes";
 
 function App() {
-  return <></>;
+  return <ShoppingRoutes />;
 }
 
 export default App;

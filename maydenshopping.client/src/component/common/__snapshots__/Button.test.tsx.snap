@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Button > renders with margins by default 1`] = `
+<div>
+  <button
+    style="margin: 2pt 3pt;"
+  >
+    Test
+  </button>
+</div>
+`;

@@ -1,0 +1,13 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`TablePagination > Should render correctly 1`] = `
+<div>
+  <div>
+    <button
+      style="margin: 2pt 3pt;"
+    >
+      1
+    </button>
+  </div>
+</div>
+`;

@@ -1,6 +1,6 @@
-interface ResponseList<T> {
+export interface ResponseList<T> {
   items: T[];
   totalItems: number;
+  page: number;
+  pageSize: number;
 }
-
-export default ResponseList;

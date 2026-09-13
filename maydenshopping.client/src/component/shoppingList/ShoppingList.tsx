@@ -1,7 +1,9 @@
+import Header from "../common/Header";
+
 const FoodList = () => {
   return (
     <div>
-      <button>Shop</button>
+      <Header title="Shopping List" to="Shop" />
     </div>
   );
 };

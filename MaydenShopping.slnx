@@ -6,5 +6,5 @@
   </Project>
   <Project Path="MaydenShopping.Server/MaydenShopping.Server.csproj" />
   <Project Path="Models/Models.csproj" Id="2237e882-243d-4e8c-81cb-c45c24a7bea8" />
-  <Project Path="Service/Service.csproj" Id="1e600496-9a21-41b2-b004-df90e2cd6021" />
+  <Project Path="UnitTests/UnitTests.csproj" Id="5402ba05-70c0-4b55-afca-a08df76e0a1c" />
 </Solution>
