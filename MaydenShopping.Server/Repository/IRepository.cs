@@ -1,11 +1,12 @@
 ﻿using Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace MaydenShopping.Server.Repository
 {
     public interface IRepository<T> : IDisposable where T : class, IEntity
     {
 
-        IEnumerable<T> Get();
+        IQueryable<T> Get();
 
         Task<T?> GetById(int id, CancellationToken token);
 

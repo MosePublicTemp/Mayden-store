@@ -9,7 +9,7 @@ namespace MaydenShopping.Server
         {
         }
 
-        DbSet<FoodItem> Food { get; set; }
+        public DbSet<FoodItem> FoodItem { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

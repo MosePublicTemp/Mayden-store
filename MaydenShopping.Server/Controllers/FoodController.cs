@@ -1,21 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Models.Common;
+using Service.Food;
 
 namespace MaydenShopping.Server.Controllers
 {
-    public class FoodController
+    [Route("[controller]")]
+    public class FoodController(IFoodService service) : Controller
     {
 
-        /*[HttpGet("{id}")]
-        public IActionResult getFoodItem([FromRoute] int id, CancellationToken token = default)
+        [HttpGet(":id")]
+        public async Task<IActionResult> getFoodItem([FromRoute] int id, CancellationToken token = default)
         {
-
+            return await service.Get(id, token);
         }
 
         [HttpGet]
-        public IActionResult getFoodItems(CancellationToken token = default)
+        public async Task<IActionResult> getFoodItems([FromQuery] RequestList request, CancellationToken token = default)
         {
-
-        }*/
+            return await service.GetItems(request, token);
+        }
         
     }
 }

@@ -36,7 +36,7 @@ namespace MaydenShopping.Server.Repository
             GC.SuppressFinalize(this);
         }
 
-        public IEnumerable<T> Get()
+        public IQueryable<T> Get()
         {
             return Table();
         }

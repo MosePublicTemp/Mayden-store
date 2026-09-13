@@ -1,7 +1,15 @@
-import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import {
+  configureStore,
+  type Action,
+  type ThunkAction,
+} from "@reduxjs/toolkit";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import shop from "./store/state/ShopItemState";
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    shop,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
@@ -12,3 +20,6 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   Action<string>
 >;
+
+export const useAppDispatch: () => AppDispatch = useDispatch;
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
