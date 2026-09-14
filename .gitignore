@@ -4,3 +4,4 @@ maydenshopping.client/node_modules
 */obj/*
 .vs/*
 */coverage/*
+*.tsbuildinfo

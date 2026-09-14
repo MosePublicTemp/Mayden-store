@@ -15,6 +15,7 @@ const ShoppingListTableItem = ({ item }: ShoppingListTableItemProps) => {
         borderBlockColor: "White",
         borderStyle: "solid",
         borderWidth: "2px",
+        marginTop: "5pt",
       }}
     >
       <div style={{ display: "flex" }}>

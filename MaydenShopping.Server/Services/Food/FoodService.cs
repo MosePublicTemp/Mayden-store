@@ -3,7 +3,6 @@ using MaydenShopping.Server;
 using MaydenShopping.Server.Mapping;
 using MaydenShopping.Server.Repository;
 using MaydenShopping.Server.Services;
-using MaydenShopping.Server.Services.ShoppingList;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Models.Common;

@@ -1,0 +1,26 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ShopTableItem > should render correctly 1`] = `
+<div>
+  <tr>
+    <td>
+      test 1
+    </td>
+    <td>
+      £
+      2
+    </td>
+    <td>
+      <div>
+        <button
+          aria-label="Add to shopping list"
+          disabled=""
+          style="margin: 2pt 3pt;"
+        >
+          Add
+        </button>
+      </div>
+    </td>
+  </tr>
+</div>
+`;

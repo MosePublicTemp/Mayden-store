@@ -17,6 +17,7 @@ exports[`Header > Should render title and button with Shop button 1`] = `
       style="width: 20%;"
     >
       <button
+        aria-label="Go to Shop"
         style="margin: auto;"
       >
         Shop
@@ -43,6 +44,7 @@ exports[`Header > Should render title and button with Shopping button 1`] = `
       style="width: 20%;"
     >
       <button
+        aria-label="Go to Shopping"
         style="margin: auto;"
       >
         Shopping
