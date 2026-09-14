@@ -57,4 +57,34 @@ describe("ShoppingListTable", () => {
     expect(item1).toBeVisible();
     expect(item2).toBeVisible();
   });
+
+  it("should render price", () => {
+    const items: ShoppingListItem[] = [
+      {
+        id: 0,
+        isInTrolly: false,
+        name: "test 1",
+        price: 5.0,
+        foodItemId: 0,
+      },
+      {
+        id: 1,
+        isInTrolly: false,
+        name: "test 2",
+        price: 1,
+        foodItemId: 0,
+      },
+    ];
+    render(<ShoppingListTable />, {
+      shoppingList: {
+        items,
+        request: "Received",
+      },
+    });
+
+    const totalCost = screen.getByText("Total cost: £");
+    expect(totalCost).toBeVisible();
+    const cost = screen.getByText("6");
+    expect(cost).toBeVisible();
+  });
 });
