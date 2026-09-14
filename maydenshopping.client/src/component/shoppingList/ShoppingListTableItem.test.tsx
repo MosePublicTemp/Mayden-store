@@ -47,7 +47,9 @@ describe("ShoppingListTableItem", () => {
     const priceElement = screen.getByText("Price:");
     const moveUpButton = screen.getByRole("button", { name: "Move Up" });
     const moveDownButton = screen.getByRole("button", { name: "Move Down" });
-    const deleteButton = screen.getByRole("button", { name: "Delete" });
+    const deleteButton = screen.getByRole("button", {
+      name: "Remove from shopping list",
+    });
 
     expect(itemElement).toBeVisible();
     expect(priceElement).toBeVisible();

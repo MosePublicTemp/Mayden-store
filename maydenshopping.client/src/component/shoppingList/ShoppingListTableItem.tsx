@@ -73,7 +73,12 @@ const ShoppingListTableItem = ({
                 Move Down
               </Button>
 
-              <Button onClick={() => setIsDeleteModal(true)}>Delete</Button>
+              <Button
+                aria-label="Remove from shopping list"
+                onClick={() => setIsDeleteModal(true)}
+              >
+                Delete
+              </Button>
             </div>
           </div>
         </div>
