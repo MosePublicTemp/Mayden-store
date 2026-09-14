@@ -2,71 +2,91 @@
 
 exports[`ShoppingListTable > should render correctly 1`] = `
 <div>
-  <ol>
-    <div
-      id="0"
-      style="border-style: solid; border-width: 2px; margin-top: 5pt;"
-    >
+  <div>
+    <ol>
       <div
-        style="display: flex;"
+        id="0"
+        style="border-style: solid; border-width: 2px; margin-top: 5pt;"
       >
-        <p
-          style="css-float: left; width: 90%;"
+        <div
+          style="display: flex;"
         >
-          test 1
-        </p>
-        <button
-          style="css-float: right;"
-        >
-          Expand
-        </button>
+          <p
+            style="css-float: left; width: 90%;"
+          >
+            test 1
+          </p>
+          <button
+            style="css-float: right;"
+          >
+            Expand
+          </button>
+        </div>
       </div>
-    </div>
-  </ol>
+    </ol>
+    <p
+      style="css-float: left;"
+    >
+      Total cost: £
+      <span>
+        0
+      </span>
+    </p>
+  </div>
 </div>
 `;
 
 exports[`ShoppingListTable > should render multiple correctly 1`] = `
 <div>
-  <ol>
-    <div
-      id="0"
-      style="border-style: solid; border-width: 2px; margin-top: 5pt;"
-    >
+  <div>
+    <ol>
       <div
-        style="display: flex;"
+        id="0"
+        style="border-style: solid; border-width: 2px; margin-top: 5pt;"
       >
-        <p
-          style="css-float: left; width: 90%;"
+        <div
+          style="display: flex;"
         >
-          test 1
-        </p>
-        <button
-          style="css-float: right;"
-        >
-          Expand
-        </button>
+          <p
+            style="css-float: left; width: 90%;"
+          >
+            test 1
+          </p>
+          <button
+            style="css-float: right;"
+          >
+            Expand
+          </button>
+        </div>
       </div>
-    </div>
-    <div
-      id="1"
-      style="border-style: solid; border-width: 2px; margin-top: 5pt;"
-    >
       <div
-        style="display: flex;"
+        id="1"
+        style="border-style: solid; border-width: 2px; margin-top: 5pt;"
       >
-        <p
-          style="css-float: left; width: 90%;"
+        <div
+          style="display: flex;"
         >
-          test 2
-        </p>
-        <button
-          style="css-float: right;"
-        >
-          Expand
-        </button>
+          <p
+            style="css-float: left; width: 90%;"
+          >
+            test 2
+          </p>
+          <button
+            style="css-float: right;"
+          >
+            Expand
+          </button>
+        </div>
       </div>
-    </div>
-  </ol>
+    </ol>
+    <p
+      style="css-float: left;"
+    >
+      Total cost: £
+      <span>
+        1
+      </span>
+    </p>
+  </div>
 </div>
 `;

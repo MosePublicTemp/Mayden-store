@@ -25,7 +25,17 @@ exports[`ShoppingList > Should render correctly 1`] = `
         </button>
       </div>
     </div>
-    <ol />
+    <div>
+      <ol />
+      <p
+        style="css-float: left;"
+      >
+        Total cost: £
+        <span>
+          0
+        </span>
+      </p>
+    </div>
   </div>
 </div>
 `;
