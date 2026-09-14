@@ -5,9 +5,7 @@ import { defaultState } from "./../../utils/RequestList";
 import Header from "../common/Header";
 import ShopTable from "./ShopTable";
 
-interface ShopProps {}
-
-const Shop = (props: ShopProps) => {
+const Shop = () => {
   const dispatch = useAppDispatch();
   const { request } = useAppSelector((state) => state.shop);
   useEffect(() => {

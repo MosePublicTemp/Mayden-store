@@ -11,6 +11,7 @@ describe("ShoppingListTableItem", () => {
       isInTrolly: false,
       name: "Test 1",
       price: 2,
+      foodItemId: 0,
     };
     const { container } = render(<ShoppingListTableItem item={item} />);
 
@@ -29,6 +30,7 @@ describe("ShoppingListTableItem", () => {
       isInTrolly: false,
       name: "Test 1",
       price: 2,
+      foodItemId: 0,
     };
     render(<ShoppingListTableItem item={item} />);
 

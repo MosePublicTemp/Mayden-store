@@ -14,5 +14,10 @@ namespace MaydenShopping.Server.Services
         {
             return new OkResult();
         }
+
+        public IActionResult NotFound()
+        {
+            return new NotFoundObjectResult(null);
+        }
     }
 }

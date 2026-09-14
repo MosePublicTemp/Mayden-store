@@ -7,6 +7,6 @@
         public int FoodItemId { get; set; }
         public bool IsInTrolly { get; set; }
 
-        public FoodItem FoodItem;
+        public FoodItem FoodItem { get; set; } = default!;
     }
 }

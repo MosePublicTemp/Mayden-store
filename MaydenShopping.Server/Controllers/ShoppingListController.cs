@@ -13,10 +13,10 @@ namespace MaydenShopping.Server.Controllers
             return await service.GetShoppingList(token);
         }
 
-        [HttpPut(":id")]
-        public async Task<IActionResult> InsertFoodItem([FromRoute] int foodItemId, CancellationToken token = default)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> InsertFoodItem(int id, CancellationToken token = default)
         {
-            return await service.InsertFoodItem(foodItemId, token);
+            return await service.InsertFoodItem(id, token);
         }
     }
 }

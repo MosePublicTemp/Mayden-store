@@ -42,6 +42,13 @@ namespace MaydenShopping.Server.Services.ShoppingList
             if (foodItem is null)
             {
                 logger.LogError($"Invalid Id of {foodItemId} was called for.");
+                return NotFound();
+            }
+            var hasFoodItem = await repository.Get().AnyAsync(x => x.FoodItemId == foodItemId, token);
+            if (hasFoodItem)
+            {
+                logger.LogError($"Id of {foodItemId} was already added.");
+                return NotFound();
             }
             var shoppingListItem = new ShoppingListItem
             {
@@ -50,7 +57,8 @@ namespace MaydenShopping.Server.Services.ShoppingList
                 IsInTrolly = false
             };
             await repository.Insert(shoppingListItem, token);
-            return Success();
+            await repository.Save(token);
+            return Success(ResponseMappings.MapToResponse(shoppingListItem));
         }
     }
 }
