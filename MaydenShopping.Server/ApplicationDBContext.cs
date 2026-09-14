@@ -10,10 +10,11 @@ namespace MaydenShopping.Server
         }
 
         public DbSet<FoodItem> FoodItem { get; set; }
+        public DbSet<ShoppingListItem> ShoppingListItem { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnConfiguring(optionsBuilder);
+            modelBuilder.Entity<FoodItem>().HasMany(e => e.ShoppingListItems).WithOne(e => e.FoodItem).HasForeignKey(e => e.FoodItemId).IsRequired();
         }
     }
 }

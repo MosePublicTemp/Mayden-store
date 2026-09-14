@@ -1,4 +1,6 @@
-﻿namespace Data
+﻿using System.Collections.ObjectModel;
+
+namespace Data
 {
     public class FoodItem : IEntity
     {
@@ -7,5 +9,7 @@
         public string Name { get; set; }
         public string Barcode { get; set; }
         public double Price { get; set; }
+
+        public Collection<ShoppingListItem> ShoppingListItems = default!;
     }
 }

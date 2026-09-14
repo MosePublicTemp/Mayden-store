@@ -9,7 +9,7 @@ interface ShopProps {}
 
 const Shop = (props: ShopProps) => {
   const dispatch = useAppDispatch();
-  const { items, request } = useAppSelector((state) => state.shop);
+  const { request } = useAppSelector((state) => state.shop);
   useEffect(() => {
     if (request === "Never") {
       dispatch(requestItems(defaultState));

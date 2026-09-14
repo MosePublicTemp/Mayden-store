@@ -9,5 +9,10 @@ namespace MaydenShopping.Server.Services
         {
             return new OkObjectResult(value);
         }
+
+        public IActionResult Success()
+        {
+            return new OkResult();
+        }
     }
 }

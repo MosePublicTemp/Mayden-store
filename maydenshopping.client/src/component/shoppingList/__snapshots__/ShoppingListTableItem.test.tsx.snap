@@ -1,0 +1,25 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ShoppingListTableItem > Should render correctly 1`] = `
+<div>
+  <div
+    id="0"
+    style="border-style: solid; border-width: 2px;"
+  >
+    <div
+      style="display: flex;"
+    >
+      <p
+        style="css-float: left; width: 90%;"
+      >
+        Test 1
+      </p>
+      <button
+        style="css-float: right;"
+      >
+        Expand
+      </button>
+    </div>
+  </div>
+</div>
+`;
