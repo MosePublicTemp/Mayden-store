@@ -1,10 +1,12 @@
 import {
+  deleteItem,
   ShoppingListItem,
   updateSortIndex,
 } from "@/store/state/ShoppingListState";
 import Button from "../common/Button";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import DeleteModal from "../common/DeleteModal";
 
 type ShoppingListTableItemProps = {
   item: ShoppingListItem;
@@ -18,6 +20,7 @@ const ShoppingListTableItem = ({
   isLast,
 }: ShoppingListTableItemProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isDeleteModal, setIsDeleteModal] = useState(false);
   const dispatch = useDispatch();
   const moveSort = (index: number) => {
     dispatch(
@@ -69,9 +72,20 @@ const ShoppingListTableItem = ({
               <Button disabled={isLast} onClick={() => moveSort(1)}>
                 Move Down
               </Button>
+
+              <Button onClick={() => setIsDeleteModal(true)}>Delete</Button>
             </div>
           </div>
         </div>
+      )}
+      {isDeleteModal && (
+        <DeleteModal
+          itemName={item.name}
+          onConfirm={() => {
+            dispatch(deleteItem(item.id));
+          }}
+          onClose={() => setIsDeleteModal(false)}
+        />
       )}
     </div>
   );

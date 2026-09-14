@@ -47,12 +47,15 @@ describe("ShoppingListTableItem", () => {
     const priceElement = screen.getByText("Price:");
     const moveUpButton = screen.getByRole("button", { name: "Move Up" });
     const moveDownButton = screen.getByRole("button", { name: "Move Down" });
+    const deleteButton = screen.getByRole("button", { name: "Delete" });
 
     expect(itemElement).toBeVisible();
     expect(priceElement).toBeVisible();
     expect(moveUpButton).toBeVisible();
     expect(moveDownButton).toBeVisible();
+    expect(deleteButton).toBeVisible();
   });
+
   it("Should disable move up button when isFirst is true", () => {
     const item: ShoppingListItem = {
       id: 0,
@@ -70,6 +73,7 @@ describe("ShoppingListTableItem", () => {
     const moveUpButton = screen.getByRole("button", { name: "Move Up" });
     expect(moveUpButton).toBeDisabled();
   });
+
   it("Should disable move down button when isLast is true", () => {
     const item: ShoppingListItem = {
       id: 0,

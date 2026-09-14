@@ -24,5 +24,11 @@ namespace MaydenShopping.Server.Controllers
         {
             return await service.ReorderFoodItem(id, newIndex, token);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id, CancellationToken token = default)
+        {
+            return await service.DeleteFoodItem(id, token);
+        }
     }
 }
