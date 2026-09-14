@@ -31,8 +31,19 @@ namespace MaydenShopping.Server.Services.ShoppingList
         public async Task<IActionResult> GetShoppingList(CancellationToken token)
         {
             logger.LogInformation($"Called {nameof(GetShoppingList)}");
-            var results = await repository.Get().Include(x => x.FoodItem).Select(shoppingListItem => ResponseMappings.MapToResponse(shoppingListItem)).OrderBy(t => t.SortIndex).ToListAsync(token);
+            var results = await repository.Get().Include(x => x.FoodItem).Select(shoppingListItem => ResponseMappings.MapToResponse(shoppingListItem)).ToListAsync(token);
             return Success(results);
+        }
+
+        public async Task<IActionResult> DeleteFoodItem(int foodItemId, CancellationToken token)
+        {
+            logger.LogInformation($"Called {nameof(DeleteFoodItem)}");
+            if (!await repository.DeleteAsync(foodItemId, token)){
+                logger.LogError($"Invalid Id of {foodItemId} was called for.");
+                return NotFound();
+            }
+            await repository.Save(token);
+            return Success(new { foodItemId });
         }
 
         public async Task<IActionResult> InsertFoodItem(int foodItemId, CancellationToken token)

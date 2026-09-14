@@ -11,5 +11,7 @@ namespace MaydenShopping.Server.Services.ShoppingList
         Task<IActionResult> InsertFoodItem(int foodItemId, CancellationToken token);
 
         Task<IActionResult> ReorderFoodItem(int id, int newSortIndex, CancellationToken token);
+
+        Task<IActionResult> DeleteFoodItem(int foodItemId, CancellationToken token);
     }
 }

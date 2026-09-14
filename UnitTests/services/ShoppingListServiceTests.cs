@@ -169,5 +169,35 @@ namespace UnitTests.services
             // Assert
             Assert.That(result, Is.InstanceOf<BadRequestObjectResult>());
         }
+
+        [Test]
+        public async Task Should_Delete_Item()
+        {
+            // Arrange
+            repository.DeleteAsync(1, Arg.Any<CancellationToken>()).Returns(true);
+
+            // Act
+            var result = await target.DeleteFoodItem(1, CancellationToken.None);
+
+            // Assert
+            await repository.Received(1).DeleteAsync(1, Arg.Any<CancellationToken>());
+            await repository.Received(1).Save(Arg.Any<CancellationToken>());
+            Assert.That(result, Is.InstanceOf<OkObjectResult>());
+        }
+
+        [Test]
+        public async Task Should_Delete_Fail_to_delete_item_if_not_present()
+        {
+            // Arrange
+            repository.DeleteAsync(1, Arg.Any<CancellationToken>()).Returns(false);
+
+            // Act
+            var result = await target.DeleteFoodItem(1, CancellationToken.None);
+
+            // Assert
+            await repository.Received(1).DeleteAsync(1, Arg.Any<CancellationToken>());
+            await repository.Received(0).Save(Arg.Any<CancellationToken>());
+            Assert.That(result, Is.InstanceOf<NotFoundObjectResult>());
+        }
     }
 }

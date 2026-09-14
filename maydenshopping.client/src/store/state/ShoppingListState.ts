@@ -76,6 +76,14 @@ export const slice = createSlice({
         state.items = action.payload;
       },
     );
+    builder.addCase(
+      deleteItem.fulfilled,
+      (state, action: PayloadAction<{ foodItemId: number }>) => {
+        state.items = state.items.filter(
+          (item) => item.id !== action.payload.foodItemId,
+        );
+      },
+    );
   },
 });
 
@@ -111,6 +119,16 @@ export const updateSortIndex = createAsyncThunk(
         method: "put",
       },
     );
+    return await response.json();
+  },
+);
+
+export const deleteItem = createAsyncThunk(
+  "shopping/delete",
+  async (id: number) => {
+    const response = await fetch(`${ServerURL}ShoppingList/${id}`, {
+      method: "delete",
+    });
     return await response.json();
   },
 );
