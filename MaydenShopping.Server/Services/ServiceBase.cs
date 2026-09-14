@@ -19,5 +19,15 @@ namespace MaydenShopping.Server.Services
         {
             return new NotFoundObjectResult(null);
         }
+
+        public IActionResult NotFound(object value)
+        {
+            return new NotFoundObjectResult(value);
+        }
+
+        public IActionResult ValidationProblem(string field, string error)
+        {
+            return new BadRequestObjectResult(new { field, error });
+        }
     }
 }

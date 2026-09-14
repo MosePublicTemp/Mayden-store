@@ -2,6 +2,7 @@ import { PendingRequest } from "@/utils/PendingRequest";
 import { ServerURL } from "@/utils/server";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { FoodItem } from "./FoodItemsState";
+import { deleteFood } from "./ShopItemState";
 
 export interface ShoppingListItem {
   name: string;
@@ -51,6 +52,14 @@ export const slice = createSlice({
         const updatedItems = [...state.items, action.payload];
         state.request = "Received";
         state.items = updatedItems;
+      },
+    );
+    builder.addCase(
+      deleteFood.fulfilled,
+      (state, action: PayloadAction<{ itemId: number; success: boolean }>) => {
+        state.items = state.items.filter(
+          (item) => item.foodItemId != action.payload.itemId,
+        );
       },
     );
   },
