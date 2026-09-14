@@ -60,5 +60,14 @@ namespace MaydenShopping.Server.Services.ShoppingList
             await repository.Save(token);
             return Success(ResponseMappings.MapToResponse(shoppingListItem));
         }
+
+        public Task<IActionResult> ReorderFoodItem(int id, int newSortIndex, CancellationToken token)
+        {
+            var foodItem = repository.GetById(id, token);
+            if (foodItem is null)
+            {
+                
+            }
+        }
     }
 }
