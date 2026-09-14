@@ -12,6 +12,7 @@ describe("ShoppingListTable", () => {
         isInTrolly: false,
         name: "test 1",
         price: 0.0,
+        sortIndex: 0,
         foodItemId: 0,
       },
     ];
@@ -34,6 +35,7 @@ describe("ShoppingListTable", () => {
         isInTrolly: false,
         name: "test 1",
         price: 0.0,
+        sortIndex: 1,
         foodItemId: 0,
       },
       {
@@ -41,6 +43,7 @@ describe("ShoppingListTable", () => {
         isInTrolly: false,
         name: "test 2",
         price: 1,
+        sortIndex: 0,
         foodItemId: 0,
       },
     ];
@@ -65,6 +68,7 @@ describe("ShoppingListTable", () => {
         isInTrolly: false,
         name: "test 1",
         price: 5.0,
+        sortIndex: 0,
         foodItemId: 0,
       },
       {
@@ -72,6 +76,7 @@ describe("ShoppingListTable", () => {
         isInTrolly: false,
         name: "test 2",
         price: 1,
+        sortIndex: 1,
         foodItemId: 0,
       },
     ];

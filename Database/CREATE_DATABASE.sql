@@ -15,6 +15,7 @@ CREATE TABLE ShoppingListItem
     Id INT AUTO_INCREMENT PRIMARY KEY,
     FoodItemId INT NOT NULL,
     IsInTrolly BIT NOT NULL,
+    SortIndex INT NOT NULL,
     CONSTRAINT fk_foodItem
     FOREIGN KEY (FoodItemId)
     REFERENCES FoodItem(Id)

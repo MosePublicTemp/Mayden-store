@@ -79,6 +79,14 @@ namespace Service.Food
             {
                 return ValidationProblem(nameof(request.Barcode), "Barcode size is invalid");
             }
+            if (string.IsNullOrWhiteSpace(request.Name.Trim()))
+            {
+                return ValidationProblem(nameof(request.Name), "Name is empty");
+            }
+            if (request.Name.Trim().Length > 2000)
+            {
+                return ValidationProblem(nameof(request.Name), "Name is too long");
+            }
 
             var isAlreadyAdded = await repository.Get().AnyAsync(foodItem => foodItem.Name.ToLower() == request.Name.ToLower().Trim() || foodItem.Barcode == request.Barcode.ToLower(), token);
             if (isAlreadyAdded)

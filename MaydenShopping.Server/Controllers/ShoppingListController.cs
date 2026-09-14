@@ -18,5 +18,11 @@ namespace MaydenShopping.Server.Controllers
         {
             return await service.InsertFoodItem(id, token);
         }
+
+        [HttpPut("reorder/{id}/{newIndex}")]
+        public async Task<IActionResult> ReorderItem(int id, int newIndex, CancellationToken token = default)
+        {
+            return await service.ReorderFoodItem(id, newIndex, token);
+        }
     }
 }

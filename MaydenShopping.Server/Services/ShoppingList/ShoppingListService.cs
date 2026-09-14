@@ -31,7 +31,7 @@ namespace MaydenShopping.Server.Services.ShoppingList
         public async Task<IActionResult> GetShoppingList(CancellationToken token)
         {
             logger.LogInformation($"Called {nameof(GetShoppingList)}");
-            var results = await repository.Get().Include(x => x.FoodItem).Select(shoppingListItem => ResponseMappings.MapToResponse(shoppingListItem)).ToListAsync(token);
+            var results = await repository.Get().Include(x => x.FoodItem).Select(shoppingListItem => ResponseMappings.MapToResponse(shoppingListItem)).OrderBy(t => t.SortIndex).ToListAsync(token);
             return Success(results);
         }
 
@@ -48,17 +48,49 @@ namespace MaydenShopping.Server.Services.ShoppingList
             if (hasFoodItem)
             {
                 logger.LogError($"Id of {foodItemId} was already added.");
-                return NotFound();
+                return ValidationProblem("FoodItem", "Food item is already added");
             }
+            var count = await repository.Get().CountAsync(token);
             var shoppingListItem = new ShoppingListItem
             {
                 FoodItem = foodItem,
                 FoodItemId = foodItem.Id,
-                IsInTrolly = false
+                IsInTrolly = false,
+                SortIndex = count,
             };
             await repository.Insert(shoppingListItem, token);
             await repository.Save(token);
             return Success(ResponseMappings.MapToResponse(shoppingListItem));
+        }
+
+        public async Task<IActionResult> ReorderFoodItem(int id, int newSortIndex, CancellationToken token)
+        {
+            if (newSortIndex < 0)
+            {
+                return ValidationProblem(nameof(newSortIndex), "New sort index is too low");
+
+            }
+            var foodItem = await repository.GetById(id, token);
+            if (foodItem is null)
+            {
+                return NotFound(id);
+            }
+            var toReSort = await repository.Get().Include(x => x.FoodItem).ToListAsync(token);
+            if (newSortIndex > toReSort.Count)
+            {
+                return ValidationProblem(nameof(newSortIndex), "New sort index is too great");
+            }
+            toReSort.Remove(foodItem);
+            toReSort.Insert(newSortIndex, foodItem);
+            for (int index = 0; index < toReSort.Count; index++)
+            {
+                toReSort[index].SortIndex = index;
+                repository.Update(toReSort[index]);
+            }
+            foodItem.SortIndex = newSortIndex;
+            await repository.Save(token);
+            var response = toReSort.Select(item => ResponseMappings.MapToResponse(item)).OrderBy(t => t.SortIndex).ToList();
+            return Success(response);
         }
     }
 }
