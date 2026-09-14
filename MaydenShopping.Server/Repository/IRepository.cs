@@ -16,13 +16,15 @@ namespace MaydenShopping.Server.Repository
 
         void Delete(T value);
 
-        public async Task DeleteAsync(int id, CancellationToken token)
+        public async Task<bool> DeleteAsync(int id, CancellationToken token)
         {
             var entity = await GetById(id, token);
             if (entity is not null) 
             {
                 this.Delete(entity);
+                return true;
             }
+            return false;
         }
 
         Task Save(CancellationToken token);

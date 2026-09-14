@@ -13,11 +13,17 @@ exports[`ShopTableItem > should render correctly 1`] = `
     <td>
       <div>
         <button
-          aria-label="Add to shopping list"
+          aria-label="Add to the shopping list"
           disabled=""
           style="margin: 2pt 3pt;"
         >
           Add
+        </button>
+        <button
+          aria-label="Delete from the shopping list"
+          style="margin: 2pt 3pt;"
+        >
+          Delete
         </button>
       </div>
     </td>

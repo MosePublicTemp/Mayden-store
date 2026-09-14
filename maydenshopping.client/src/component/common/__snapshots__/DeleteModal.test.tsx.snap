@@ -1,0 +1,26 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`DeleteModal > Should render correctly 1`] = `
+<div>
+  <dialog
+    open=""
+  >
+    <p>
+      Are you sure you want to delete 
+      test
+    </p>
+    <div>
+      <button
+        style="margin: 2pt 3pt;"
+      >
+        Confirm
+      </button>
+      <button
+        style="margin: 2pt 3pt;"
+      >
+        Close
+      </button>
+    </div>
+  </dialog>
+</div>
+`;

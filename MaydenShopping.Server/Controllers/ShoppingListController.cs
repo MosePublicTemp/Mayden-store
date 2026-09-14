@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MaydenShopping.Server.Controllers
 {
     [Route("[controller]")]
-    public class ShoppingListController(IShoppingListService service)
+    public class ShoppingListController(IShoppingListService service) : Controller
     {
 
         [HttpGet]
