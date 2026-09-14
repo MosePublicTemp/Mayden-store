@@ -7,14 +7,14 @@ import type { PendingRequest } from "../../utils/PendingRequest";
 import type { ResponseList } from "../../utils/ResponseList";
 import type { RequestList } from "../../utils/RequestList";
 import type { FoodItem } from "./FoodItemsState";
-import { ServerURL } from "../../main";
+import { ServerURL } from "@/utils/server";
 
 export interface ShopItemState {
   items: ResponseList<FoodItem>;
   request: PendingRequest;
 }
 
-const initialState: ShopItemState = {
+export const initialState: ShopItemState = {
   items: {
     items: [],
     totalItems: 0,

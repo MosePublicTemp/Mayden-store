@@ -10,6 +10,16 @@ CREATE TABLE FoodItem
     Price DECIMAL(6, 2) NOT NULL
 );
 
+CREATE TABLE ShoppingListItem
+(
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    FoodItemId INT NOT NULL,
+    IsInTrolly BIT NOT NULL,
+    CONSTRAINT fk_foodItem
+    FOREIGN KEY (FoodItemId)
+    REFERENCES FoodItem(Id)
+);
+
 INSERT INTO FoodItem (Name, Barcode, Price)
     VALUES
         ('Raspberries', '287377667', 2.25),

@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Models.Food
+namespace Models.ShoppingList
 {
-    public class FoodResponse
+    public class ShoppingListItemResponse
     {
-
         public int Id { get; set; }
+        public int FoodItemId { get; set; }
         public string Name { get; set; } = string.Empty;
-        public string Barcode { get; set; } = string.Empty;
+        public bool IsInTrolly { get; set; }
         public double Price { get; set; }
     }
 }

@@ -30,6 +30,7 @@ const Header = ({ title, to }: HeaderProps) => {
             margin: "auto",
           }}
           onClick={() => navigate(url)}
+          aria-label={`Go to ${to}`}
         >
           {to}
         </Button>
