@@ -1,13 +1,13 @@
 import { PendingRequest } from "@/utils/PendingRequest";
 import { ServerURL } from "@/utils/server";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { FoodItem } from "./FoodItemsState";
 import { deleteFood } from "./ShopItemState";
 
 export interface ShoppingListItem {
   name: string;
   price: number;
   isInTrolly: boolean;
+  sortIndex: number;
   id: number;
   foodItemId: number;
 }
@@ -30,8 +30,11 @@ export const slice = createSlice({
     builder.addCase(
       requestShoppingList.fulfilled,
       (state, action: PayloadAction<ShoppingListItem[]>) => {
+        const updatedItems = action.payload;
+        updatedItems.sort((item1, item2) => item1.sortIndex - item2.sortIndex);
+
         state.request = "Received";
-        state.items = action.payload;
+        state.items = updatedItems;
       },
     );
     builder.addCase(requestShoppingList.pending, (state) => {
@@ -50,6 +53,7 @@ export const slice = createSlice({
       insertItem.fulfilled,
       (state, action: PayloadAction<ShoppingListItem>) => {
         const updatedItems = [...state.items, action.payload];
+        updatedItems.sort((item1, item2) => item1.sortIndex - item2.sortIndex);
         state.request = "Received";
         state.items = updatedItems;
       },
@@ -60,6 +64,16 @@ export const slice = createSlice({
         state.items = state.items.filter(
           (item) => item.foodItemId != action.payload.itemId,
         );
+      },
+    );
+    builder.addCase(
+      updateSortIndex.fulfilled,
+      (state, action: PayloadAction<ShoppingListItem[]>) => {
+        action.payload.sort(
+          (item1, item2) => item1.sortIndex - item2.sortIndex,
+        );
+        state.request = "Received";
+        state.items = action.payload;
       },
     );
   },
@@ -79,6 +93,24 @@ export const insertItem = createAsyncThunk(
     const response = await fetch(`${ServerURL}ShoppingList/${itemId}`, {
       method: "put",
     });
+    return await response.json();
+  },
+);
+
+export type UpdateSortValues = {
+  itemId: number;
+  newSortIndex: number;
+};
+
+export const updateSortIndex = createAsyncThunk(
+  "shopping/updateSort",
+  async ({ itemId, newSortIndex }: UpdateSortValues) => {
+    const response = await fetch(
+      `${ServerURL}ShoppingList/reorder/${itemId}/${newSortIndex}`,
+      {
+        method: "put",
+      },
+    );
     return await response.json();
   },
 );

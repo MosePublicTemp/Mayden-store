@@ -26,7 +26,8 @@ namespace MaydenShopping.Server.Mapping
                 FoodItemId = item.FoodItemId,
                 IsInTrolly = item.IsInTrolly,
                 Name = item.FoodItem.Name,
-                Price = item.FoodItem.Price
+                Price = item.FoodItem.Price,
+                SortIndex = item.SortIndex
             };
         }
     }

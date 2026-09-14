@@ -7,8 +7,13 @@ const ShoppingListTable = () => {
   return (
     <div>
       <ol>
-        {items.map((item) => (
-          <ShoppingListTableItem item={item} key={item.id} />
+        {items.map((item, index) => (
+          <ShoppingListTableItem
+            item={item}
+            key={item.id}
+            isFirst={index == 0}
+            isLast={index == items.length - 1}
+          />
         ))}
       </ol>
       <p style={{ float: "left" }}>

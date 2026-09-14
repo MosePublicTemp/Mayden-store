@@ -11,9 +11,12 @@ describe("ShoppingListTableItem", () => {
       isInTrolly: false,
       name: "Test 1",
       price: 2,
+      sortIndex: 0,
       foodItemId: 0,
     };
-    const { container } = render(<ShoppingListTableItem item={item} />);
+    const { container } = render(
+      <ShoppingListTableItem item={item} isFirst={false} isLast={false} />,
+    );
 
     expect(container).toMatchSnapshot();
 
@@ -30,17 +33,58 @@ describe("ShoppingListTableItem", () => {
       isInTrolly: false,
       name: "Test 1",
       price: 2,
+      sortIndex: 0,
       foodItemId: 0,
     };
-    render(<ShoppingListTableItem item={item} />);
+    render(
+      <ShoppingListTableItem item={item} isFirst={false} isLast={false} />,
+    );
 
-    const button = screen.getByRole("button", { name: "Expand" });
-    fireEvent.click(button);
+    const expandButton = screen.getByRole("button", { name: "Expand" });
+    fireEvent.click(expandButton);
 
     const itemElement = screen.getByText("Test 1");
     const priceElement = screen.getByText("Price:");
+    const moveUpButton = screen.getByRole("button", { name: "Move Up" });
+    const moveDownButton = screen.getByRole("button", { name: "Move Down" });
 
     expect(itemElement).toBeVisible();
     expect(priceElement).toBeVisible();
+    expect(moveUpButton).toBeVisible();
+    expect(moveDownButton).toBeVisible();
+  });
+  it("Should disable move up button when isFirst is true", () => {
+    const item: ShoppingListItem = {
+      id: 0,
+      isInTrolly: false,
+      name: "Test 1",
+      price: 2,
+      sortIndex: 0,
+      foodItemId: 0,
+    };
+    render(<ShoppingListTableItem item={item} isFirst={true} isLast={false} />);
+
+    const expandButton = screen.getByRole("button", { name: "Expand" });
+    fireEvent.click(expandButton);
+
+    const moveUpButton = screen.getByRole("button", { name: "Move Up" });
+    expect(moveUpButton).toBeDisabled();
+  });
+  it("Should disable move down button when isLast is true", () => {
+    const item: ShoppingListItem = {
+      id: 0,
+      isInTrolly: false,
+      name: "Test 1",
+      price: 2,
+      sortIndex: 0,
+      foodItemId: 0,
+    };
+    render(<ShoppingListTableItem item={item} isFirst={false} isLast={true} />);
+
+    const expandButton = screen.getByRole("button", { name: "Expand" });
+    fireEvent.click(expandButton);
+
+    const moveDownButton = screen.getByRole("button", { name: "Move Down" });
+    expect(moveDownButton).toBeDisabled();
   });
 });
