@@ -1,0 +1,73 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`AddShopItemForm > should render correctly 1`] = `
+<div>
+  <dialog
+    open=""
+    style="width: 50%;"
+  >
+    <form>
+      <fieldset>
+        <label
+          for="name"
+          inputmode="text"
+          style="width: 20%; margin-right: 6pt;"
+        >
+          Name
+        </label>
+        <input
+          id="name"
+          inputmode="text"
+          name="name"
+          required=""
+          style="width: 80%; css-float: right;"
+        />
+      </fieldset>
+      <fieldset>
+        <label
+          for="barcode"
+          inputmode="decimal"
+          style="width: 20%; margin-right: 6pt;"
+        >
+          Barcode
+        </label>
+        <input
+          id="barcode"
+          inputmode="decimal"
+          name="barcode"
+          required=""
+          style="width: 80%; css-float: right;"
+        />
+      </fieldset>
+      <fieldset>
+        <label
+          aria-label="Price in GBP"
+          for="price"
+          inputmode="decimal"
+          style="width: 20%; margin-right: 6pt;"
+        >
+          Price (£)
+        </label>
+        <input
+          id="price"
+          inputmode="decimal"
+          name="price"
+          required=""
+          style="width: 80%; css-float: right;"
+        />
+      </fieldset>
+      <button
+        style="margin: 2pt 3pt;"
+      >
+        Cancel
+      </button>
+      <button
+        style="margin: 2pt 3pt;"
+        type="submit"
+      >
+        Submit
+      </button>
+    </form>
+  </dialog>
+</div>
+`;

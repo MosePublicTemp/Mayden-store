@@ -21,10 +21,16 @@ describe("ShopTableItem", () => {
 
     const name = screen.getByText("test 1");
     const price = screen.getByText("£2");
-    const button = screen.getByRole("button", { name: "Add to shopping list" });
+    const addButton = screen.getByRole("button", {
+      name: "Add to the shopping list",
+    });
+    const deleteButton = screen.getByRole("button", {
+      name: "Delete from the shopping list",
+    });
     expect(container).toMatchSnapshot();
     expect(name).toBeVisible();
     expect(price).toBeVisible();
-    expect(button).toBeVisible();
+    expect(addButton).toBeVisible();
+    expect(deleteButton).toBeVisible();
   });
 });
