@@ -2,21 +2,22 @@ import { useState } from "react";
 import Button from "../common/Button";
 import Input from "../common/Input";
 import { useDispatch } from "react-redux";
-import { FoodItem, FoodItemRequest } from "@/store/state/FoodItemsState";
+import { FoodItemRequest } from "@/store/state/FoodItemsState";
 import { insertFood } from "@/store/state/ShopItemState";
 
 export type AddShopItemFormProps = {
   onClose: () => void;
+  initialValues?: Partial<FoodItemRequest>;
 };
 
-const AddShopItemForm = ({ onClose }: AddShopItemFormProps) => {
+const AddShopItemForm = ({ onClose, initialValues }: AddShopItemFormProps) => {
   const [barcodeError, setBarcodeError] = useState<string | undefined>();
   const [priceError, setPriceError] = useState<string | undefined>();
   const dispatch = useDispatch();
 
   const validateBarcode = (input: string) => {
     if (input.trim().length != 12) {
-      setBarcodeError("Barcode is 12 numbers");
+      setBarcodeError(`Barcode's are 12 numbers, found ${input.trim().length}`);
       return;
     }
     if (isNaN(parseInt(input))) {
@@ -27,8 +28,13 @@ const AddShopItemForm = ({ onClose }: AddShopItemFormProps) => {
   };
 
   const validatePrice = (input: string) => {
-    if (isNaN(parseInt(input))) {
+    const price = parseInt(input);
+    if (isNaN(price)) {
       setPriceError("Please enter a number");
+      return;
+    }
+    if (price < 0) {
+      setPriceError("Number must be positive");
       return;
     }
     setPriceError(undefined);
@@ -75,6 +81,7 @@ const AddShopItemForm = ({ onClose }: AddShopItemFormProps) => {
             inputMode="text"
             style={inputStyle}
             required={true}
+            defaultValue={initialValues?.name}
           />
         </fieldset>
         <fieldset
@@ -91,6 +98,7 @@ const AddShopItemForm = ({ onClose }: AddShopItemFormProps) => {
             inputMode="decimal"
             style={inputStyle}
             required={true}
+            defaultValue={initialValues?.barcode}
             onBlur={(event) => validateBarcode(event.currentTarget.value)}
           />
         </fieldset>
@@ -111,6 +119,7 @@ const AddShopItemForm = ({ onClose }: AddShopItemFormProps) => {
             inputMode="decimal"
             style={inputStyle}
             required={true}
+            defaultValue={initialValues?.price}
             onBlur={(event) => validatePrice(event.currentTarget.value)}
           />
         </fieldset>
