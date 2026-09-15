@@ -5,7 +5,7 @@
 
         public static string Repeat(this string value, int amount)
         {
-            var buffer = value;
+            string buffer = value;
             for (int i = 1; i < amount; i++)
             {
                 buffer += value;

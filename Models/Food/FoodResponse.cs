@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Models.Food
+﻿namespace Models.Food
 {
     public class FoodResponse
     {

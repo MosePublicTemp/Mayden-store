@@ -2,14 +2,13 @@
 
 using Data;
 using MaydenShopping.Server.Repository;
+using MaydenShopping.Server.Services.Food;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using MockQueryable;
 using Models.Common;
 using Models.Food;
 using NSubstitute;
-using Service.Food;
-using MockQueryable;
-using Castle.Core.Logging;
-using Microsoft.Extensions.Logging;
 
 
 namespace UnitTests.services
@@ -43,12 +42,13 @@ namespace UnitTests.services
         public async Task Should_return_list_of_items()
         {
             // Arrange
-            var items = new List<FoodItem> { 
+            List<FoodItem> items = new()
+            {
                 new FoodItem{},
                 new FoodItem{}
             };
             repository.Get().Returns(items.BuildMock().AsQueryable());
-            var requestList = new RequestList
+            RequestList requestList = new()
             {
                 PageNumber = 1,
                 Showing = 10
@@ -59,10 +59,10 @@ namespace UnitTests.services
 
             // Assert
             Assert.That(result, Is.InstanceOf<OkObjectResult>());
-            var objectResult = (OkObjectResult)result;
+            OkObjectResult objectResult = (OkObjectResult)result;
             Assert.That(objectResult.StatusCode, Is.EqualTo(200));
             Assert.That(objectResult.Value, Is.InstanceOf<ResponseList<FoodResponse>>());
-            var responseList = (ResponseList<FoodResponse>)objectResult.Value;
+            ResponseList<FoodResponse>? responseList = (ResponseList<FoodResponse>)objectResult.Value;
             Assert.That(responseList.Items.Count(), Is.EqualTo(2));
             Assert.That(responseList.TotalItems, Is.EqualTo(2));
         }
@@ -71,7 +71,7 @@ namespace UnitTests.services
         public async Task Should_insert_item()
         {
             // Arrange
-            var item = new FoodRequest
+            FoodRequest item = new()
             {
                 Barcode = "012345678912",
                 Name = "Test",
@@ -87,7 +87,7 @@ namespace UnitTests.services
             await repository.Received().Insert(Arg.Any<FoodItem>(), Arg.Any<CancellationToken>());
             await repository.Received().Save(Arg.Any<CancellationToken>());
             Assert.That(result, Is.InstanceOf<OkResult>());
-            var objectResult = (OkResult)result;
+            OkResult objectResult = (OkResult)result;
             Assert.That(objectResult.StatusCode, Is.EqualTo(200));
         }
 
@@ -95,7 +95,7 @@ namespace UnitTests.services
         public async Task Should_fail_validation_on_barcode_not_a_number()
         {
             // Arrange
-            var item = new FoodRequest
+            FoodRequest item = new()
             {
                 Barcode = "not a number",
                 Name = "Test",
@@ -109,7 +109,7 @@ namespace UnitTests.services
             await repository.Received(0).Insert(Arg.Any<FoodItem>(), Arg.Any<CancellationToken>());
             await repository.Received(0).Save(Arg.Any<CancellationToken>());
             Assert.That(result, Is.InstanceOf<BadRequestObjectResult>());
-            var objectResult = (BadRequestObjectResult)result;
+            BadRequestObjectResult objectResult = (BadRequestObjectResult)result;
             Assert.That(objectResult.StatusCode, Is.EqualTo(400));
         }
 
@@ -117,7 +117,7 @@ namespace UnitTests.services
         public async Task Should_fail_validation_on_barcode_too_long()
         {
             // Arrange
-            var item = new FoodRequest
+            FoodRequest item = new()
             {
                 Barcode = "12345678901234567890",
                 Name = "Test",
@@ -131,7 +131,7 @@ namespace UnitTests.services
             await repository.Received(0).Insert(Arg.Any<FoodItem>(), Arg.Any<CancellationToken>());
             await repository.Received(0).Save(Arg.Any<CancellationToken>());
             Assert.That(result, Is.InstanceOf<BadRequestObjectResult>());
-            var objectResult = (BadRequestObjectResult)result;
+            BadRequestObjectResult objectResult = (BadRequestObjectResult)result;
             Assert.That(objectResult.StatusCode, Is.EqualTo(400));
         }
 
@@ -139,7 +139,7 @@ namespace UnitTests.services
         public async Task Should_fail_validation_on_barcode_too_short()
         {
             // Arrange
-            var item = new FoodRequest
+            FoodRequest item = new()
             {
                 Barcode = "1",
                 Name = "Test",
@@ -153,7 +153,7 @@ namespace UnitTests.services
             await repository.Received(0).Insert(Arg.Any<FoodItem>(), Arg.Any<CancellationToken>());
             await repository.Received(0).Save(Arg.Any<CancellationToken>());
             Assert.That(result, Is.InstanceOf<BadRequestObjectResult>());
-            var objectResult = (BadRequestObjectResult)result;
+            BadRequestObjectResult objectResult = (BadRequestObjectResult)result;
             Assert.That(objectResult.StatusCode, Is.EqualTo(400));
         }
 
@@ -161,7 +161,7 @@ namespace UnitTests.services
         public async Task Should_fail_validation_on_barcode_empty()
         {
             // Arrange
-            var item = new FoodRequest
+            FoodRequest item = new()
             {
                 Barcode = "",
                 Name = "Test",
@@ -175,7 +175,7 @@ namespace UnitTests.services
             await repository.Received(0).Insert(Arg.Any<FoodItem>(), Arg.Any<CancellationToken>());
             await repository.Received(0).Save(Arg.Any<CancellationToken>());
             Assert.That(result, Is.InstanceOf<BadRequestObjectResult>());
-            var objectResult = (BadRequestObjectResult)result;
+            BadRequestObjectResult objectResult = (BadRequestObjectResult)result;
             Assert.That(objectResult.StatusCode, Is.EqualTo(400));
         }
 
@@ -183,7 +183,7 @@ namespace UnitTests.services
         public async Task Should_fail_validation_on_name_empty()
         {
             // Arrange
-            var item = new FoodRequest
+            FoodRequest item = new()
             {
                 Barcode = "012345678912",
                 Name = "",
@@ -197,7 +197,7 @@ namespace UnitTests.services
             await repository.Received(0).Insert(Arg.Any<FoodItem>(), Arg.Any<CancellationToken>());
             await repository.Received(0).Save(Arg.Any<CancellationToken>());
             Assert.That(result, Is.InstanceOf<BadRequestObjectResult>());
-            var objectResult = (BadRequestObjectResult)result;
+            BadRequestObjectResult objectResult = (BadRequestObjectResult)result;
             Assert.That(objectResult.StatusCode, Is.EqualTo(400));
         }
 
@@ -205,7 +205,7 @@ namespace UnitTests.services
         public async Task Should_fail_validation_on_name_too_long()
         {
             // Arrange
-            var item = new FoodRequest
+            FoodRequest item = new()
             {
                 Barcode = "012345678912",
                 Name = "t".Repeat(2001),
@@ -219,7 +219,7 @@ namespace UnitTests.services
             await repository.Received(0).Insert(Arg.Any<FoodItem>(), Arg.Any<CancellationToken>());
             await repository.Received(0).Save(Arg.Any<CancellationToken>());
             Assert.That(result, Is.InstanceOf<BadRequestObjectResult>());
-            var objectResult = (BadRequestObjectResult)result;
+            BadRequestObjectResult objectResult = (BadRequestObjectResult)result;
             Assert.That(objectResult.StatusCode, Is.EqualTo(400));
         }
 
@@ -227,7 +227,7 @@ namespace UnitTests.services
         public async Task Should_fail_validation_on_price_too_low()
         {
             // Arrange
-            var item = new FoodRequest
+            FoodRequest item = new()
             {
                 Barcode = "012345678912",
                 Name = "",
@@ -241,7 +241,7 @@ namespace UnitTests.services
             await repository.Received(0).Insert(Arg.Any<FoodItem>(), Arg.Any<CancellationToken>());
             await repository.Received(0).Save(Arg.Any<CancellationToken>());
             Assert.That(result, Is.InstanceOf<BadRequestObjectResult>());
-            var objectResult = (BadRequestObjectResult)result;
+            BadRequestObjectResult objectResult = (BadRequestObjectResult)result;
             Assert.That(objectResult.StatusCode, Is.EqualTo(400));
         }
 
@@ -249,7 +249,7 @@ namespace UnitTests.services
         public async Task Should_delete_item()
         {
             // Arrange
-            var itemToDelete = new FoodItem
+            FoodItem itemToDelete = new()
             {
                 Id = 1
             };

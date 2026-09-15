@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MaydenShopping.Server.Services.Food;
+using Microsoft.AspNetCore.Mvc;
 using Models.Common;
 using Models.Food;
-using Service.Food;
 
 namespace MaydenShopping.Server.Controllers
 {
@@ -26,6 +26,6 @@ namespace MaydenShopping.Server.Controllers
         {
             return await service.InsertItem(request, token);
         }
-        
+
     }
 }

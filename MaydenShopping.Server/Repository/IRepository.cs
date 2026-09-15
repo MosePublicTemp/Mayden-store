@@ -1,5 +1,4 @@
 ﻿using Data;
-using Microsoft.EntityFrameworkCore;
 
 namespace MaydenShopping.Server.Repository
 {
@@ -18,8 +17,8 @@ namespace MaydenShopping.Server.Repository
 
         public async Task<bool> DeleteAsync(int id, CancellationToken token)
         {
-            var entity = await GetById(id, token);
-            if (entity is not null) 
+            T? entity = await GetById(id, token);
+            if (entity is not null)
             {
                 this.Delete(entity);
                 return true;
