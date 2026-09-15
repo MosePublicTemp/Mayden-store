@@ -1,5 +1,5 @@
-﻿using MaydenShopping.Server.Services.ShoppingList;
-using Service.Food;
+﻿using MaydenShopping.Server.Services.Food;
+using MaydenShopping.Server.Services.ShoppingList;
 
 namespace MaydenShopping.Server
 {

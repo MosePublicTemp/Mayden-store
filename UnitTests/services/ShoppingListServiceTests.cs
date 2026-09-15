@@ -2,15 +2,12 @@
 
 using Data;
 using MaydenShopping.Server.Repository;
-using Microsoft.AspNetCore.Mvc;
-using Models.Common;
-using Models.Food;
-using NSubstitute;
-using Service.Food;
-using MockQueryable;
 using MaydenShopping.Server.Services.ShoppingList;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MockQueryable;
 using Models.ShoppingList;
+using NSubstitute;
 
 
 namespace UnitTests.services
@@ -44,7 +41,8 @@ namespace UnitTests.services
         public async Task Should_return_list_of_items()
         {
             // Arrange
-            var items = new List<ShoppingListItem> { 
+            List<ShoppingListItem> items = new()
+            {
                 new ShoppingListItem{
                 FoodItem = new FoodItem
                 {
@@ -71,14 +69,14 @@ namespace UnitTests.services
             repository.Get().Returns(items.BuildMock().AsQueryable());
 
             // Act
-            var result = await target.GetShoppingList(CancellationToken.None);
+            IActionResult result = await target.GetShoppingList(CancellationToken.None);
 
             // Assert
             Assert.That(result, Is.InstanceOf<OkObjectResult>());
-            var objectResult = (OkObjectResult)result;
+            OkObjectResult objectResult = (OkObjectResult)result;
             Assert.That(objectResult.StatusCode, Is.EqualTo(200));
             Assert.That(objectResult.Value, Is.InstanceOf<IEnumerable<ShoppingListItemResponse>>());
-            var responseList = ((IEnumerable<ShoppingListItemResponse>)objectResult.Value).ToList();
+            List<ShoppingListItemResponse> responseList = ((IEnumerable<ShoppingListItemResponse>)objectResult.Value).ToList();
             Assert.That(responseList.Count(), Is.EqualTo(2));
             Assert.That(responseList[0].Id, Is.EqualTo(2));
             Assert.That(responseList[1].Id, Is.EqualTo(1));
@@ -88,7 +86,8 @@ namespace UnitTests.services
         public async Task Should_reOrder_shopping_list()
         {
             // Arrange
-            var items = new List<ShoppingListItem> {
+            List<ShoppingListItem> items = new()
+            {
                 new ShoppingListItem{
                 FoodItem = new FoodItem
                 {
@@ -116,14 +115,14 @@ namespace UnitTests.services
             repository.GetById(1, Arg.Any<CancellationToken>()).Returns(items[0]);
 
             // Act
-            var result = await target.ReorderFoodItem(1, 0, CancellationToken.None);
+            IActionResult result = await target.ReorderFoodItem(1, 0, CancellationToken.None);
 
             // Assert
             Assert.That(result, Is.InstanceOf<OkObjectResult>());
-            var objectResult = (OkObjectResult)result;
+            OkObjectResult objectResult = (OkObjectResult)result;
             Assert.That(objectResult.StatusCode, Is.EqualTo(200));
             Assert.That(objectResult.Value, Is.InstanceOf<IEnumerable<ShoppingListItemResponse>>());
-            var responseList = ((IEnumerable<ShoppingListItemResponse>)objectResult.Value).ToList();
+            List<ShoppingListItemResponse> responseList = ((IEnumerable<ShoppingListItemResponse>)objectResult.Value).ToList();
             Assert.That(responseList.Count(), Is.EqualTo(2));
             Assert.That(responseList[0].Id, Is.EqualTo(1));
             Assert.That(responseList[1].Id, Is.EqualTo(2));
@@ -133,7 +132,7 @@ namespace UnitTests.services
         public async Task Should_Insert_Item()
         {
             // Arrange
-            var foodItem = new FoodItem
+            FoodItem foodItem = new()
             {
 
             };
@@ -141,11 +140,11 @@ namespace UnitTests.services
             repository.Get().Returns(new List<ShoppingListItem>().BuildMock().AsQueryable());
 
             // Act
-            var result = await target.InsertFoodItem(1, CancellationToken.None);
+            IActionResult result = await target.InsertFoodItem(1, CancellationToken.None);
 
             // Assert
             Assert.That(result, Is.InstanceOf<OkObjectResult>());
-            var objectResult = (OkObjectResult)result;
+            OkObjectResult objectResult = (OkObjectResult)result;
             Assert.That(objectResult.StatusCode, Is.EqualTo(200));
         }
 
@@ -153,18 +152,18 @@ namespace UnitTests.services
         public async Task Should_Fail_Insert_When_Id_Is_Used()
         {
             // Arrange
-            var foodItem = new FoodItem
+            FoodItem foodItem = new()
             {
 
             };
             foodItemRepository.GetById(1, Arg.Any<CancellationToken>()).Returns(foodItem);
-            repository.Get().Returns(new List<ShoppingListItem> { new ShoppingListItem { 
+            repository.Get().Returns(new List<ShoppingListItem> { new() {
             FoodItem = foodItem,
             FoodItemId = 1
             } }.BuildMock().AsQueryable());
 
             // Act
-            var result = await target.InsertFoodItem(1, CancellationToken.None);
+            IActionResult result = await target.InsertFoodItem(1, CancellationToken.None);
 
             // Assert
             Assert.That(result, Is.InstanceOf<BadRequestObjectResult>());
@@ -177,7 +176,7 @@ namespace UnitTests.services
             repository.DeleteAsync(1, Arg.Any<CancellationToken>()).Returns(true);
 
             // Act
-            var result = await target.DeleteFoodItem(1, CancellationToken.None);
+            IActionResult result = await target.DeleteFoodItem(1, CancellationToken.None);
 
             // Assert
             await repository.Received(1).DeleteAsync(1, Arg.Any<CancellationToken>());
@@ -192,7 +191,7 @@ namespace UnitTests.services
             repository.DeleteAsync(1, Arg.Any<CancellationToken>()).Returns(false);
 
             // Act
-            var result = await target.DeleteFoodItem(1, CancellationToken.None);
+            IActionResult result = await target.DeleteFoodItem(1, CancellationToken.None);
 
             // Assert
             await repository.Received(1).DeleteAsync(1, Arg.Any<CancellationToken>());

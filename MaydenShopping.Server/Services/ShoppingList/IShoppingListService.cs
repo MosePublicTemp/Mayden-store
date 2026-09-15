@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Models.ShoppingList;
 
 namespace MaydenShopping.Server.Services.ShoppingList
 {

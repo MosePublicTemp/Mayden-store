@@ -3,12 +3,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MaydenShopping.Server
 {
-    public class ApplicationDBContext : DbContext
+    public class ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : DbContext(options)
     {
-        public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options)
-        {
-        }
-
         public DbSet<FoodItem> FoodItem { get; set; }
         public DbSet<ShoppingListItem> ShoppingListItem { get; set; }
 

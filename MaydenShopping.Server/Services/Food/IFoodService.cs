@@ -2,7 +2,7 @@
 using Models.Common;
 using Models.Food;
 
-namespace Service.Food
+namespace MaydenShopping.Server.Services.Food
 {
     public interface IFoodService
     {

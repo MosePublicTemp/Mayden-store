@@ -3,6 +3,7 @@ using MaydenShopping.Server.Mapping;
 using MaydenShopping.Server.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Models.ShoppingList;
 
 namespace MaydenShopping.Server.Services.ShoppingList
 {
@@ -31,14 +32,15 @@ namespace MaydenShopping.Server.Services.ShoppingList
         public async Task<IActionResult> GetShoppingList(CancellationToken token)
         {
             logger.LogInformation($"Called {nameof(GetShoppingList)}");
-            var results = await repository.Get().Include(x => x.FoodItem).Select(shoppingListItem => ResponseMappings.MapToResponse(shoppingListItem)).ToListAsync(token);
+            List<ShoppingListItemResponse> results = await repository.Get().Include(x => x.FoodItem).Select(shoppingListItem => ResponseMappings.MapToResponse(shoppingListItem)).ToListAsync(token);
             return Success(results);
         }
 
         public async Task<IActionResult> DeleteFoodItem(int foodItemId, CancellationToken token)
         {
             logger.LogInformation($"Called {nameof(DeleteFoodItem)}");
-            if (!await repository.DeleteAsync(foodItemId, token)){
+            if (!await repository.DeleteAsync(foodItemId, token))
+            {
                 logger.LogError($"Invalid Id of {foodItemId} was called for.");
                 return NotFound();
             }
@@ -49,19 +51,19 @@ namespace MaydenShopping.Server.Services.ShoppingList
         public async Task<IActionResult> InsertFoodItem(int foodItemId, CancellationToken token)
         {
             logger.LogInformation($"Called {nameof(GetShoppingList)}");
-            var foodItem = await foodRepository.GetById(foodItemId, token);
+            FoodItem? foodItem = await foodRepository.GetById(foodItemId, token);
             if (foodItem is null)
             {
                 logger.LogError($"Invalid Id of {foodItemId} was called for.");
                 return NotFound();
             }
-            var hasFoodItem = await repository.Get().AnyAsync(x => x.FoodItemId == foodItemId, token);
+            bool hasFoodItem = await repository.Get().AnyAsync(x => x.FoodItemId == foodItemId, token);
             if (hasFoodItem)
             {
                 logger.LogError($"Id of {foodItemId} was already added.");
                 return ValidationProblem("FoodItem", "Food item is already added");
             }
-            var count = await repository.Get().CountAsync(token);
+            int count = await repository.Get().CountAsync(token);
             var shoppingListItem = new ShoppingListItem
             {
                 FoodItem = foodItem,
@@ -81,12 +83,12 @@ namespace MaydenShopping.Server.Services.ShoppingList
                 return ValidationProblem(nameof(newSortIndex), "New sort index is too low");
 
             }
-            var foodItem = await repository.GetById(id, token);
+            ShoppingListItem? foodItem = await repository.GetById(id, token);
             if (foodItem is null)
             {
                 return NotFound(id);
             }
-            var toReSort = await repository.Get().Include(x => x.FoodItem).ToListAsync(token);
+            List<ShoppingListItem> toReSort = await repository.Get().Include(x => x.FoodItem).ToListAsync(token);
             if (newSortIndex > toReSort.Count)
             {
                 return ValidationProblem(nameof(newSortIndex), "New sort index is too great");
