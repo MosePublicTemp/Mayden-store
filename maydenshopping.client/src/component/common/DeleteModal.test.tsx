@@ -1,6 +1,5 @@
 import { render } from "@/utils/Testing";
 import { screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import DeleteModal from "./DeleteModal";
 import "@testing-library/jest-dom";

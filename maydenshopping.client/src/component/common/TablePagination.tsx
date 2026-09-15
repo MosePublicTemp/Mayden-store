@@ -12,11 +12,11 @@ const TablePagination = ({
   showingCount: showing,
 }: TablePaginationProps) => {
   const minPage = Math.max(currentPage - 2, 1);
-  const maxTotalPage = totalItems / showing;
+  const maxTotalPage = Math.floor(totalItems / showing);
   const maxPage = Math.min(currentPage + 2, maxTotalPage);
-  const pageButtonIndex = [...Array(Math.max(1, maxPage - minPage)).keys()].map(
-    (index) => index + minPage,
-  );
+  const pageButtonIndex = [
+    ...Array(Math.max(1, 1 + Math.floor(maxPage - minPage))).keys(),
+  ].map((index) => index + minPage);
   return (
     <div>
       {pageButtonIndex.map((index) => (

@@ -1,0 +1,64 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Shop > Should render correctly 1`] = `
+<div>
+  <div>
+    <div
+      style="display: flex; background-color: darkgray; width: 100%; margin-bottom: 5pt;"
+    >
+      <h1
+        style="width: 20%; font-size: 22pt; margin: 0.5em;"
+      >
+        Shop
+      </h1>
+      <div
+        style="width: 60%;"
+      />
+      <div
+        style="width: 20%;"
+      >
+        <button
+          aria-label="Go to Shopping"
+          style="margin: auto;"
+        >
+          Shopping
+        </button>
+      </div>
+    </div>
+    <div>
+      <button
+        style="css-float: left;"
+      >
+        Add item
+      </button>
+    </div>
+    <table
+      style="width: 100%;"
+    >
+      <thead>
+        <tr>
+          <th>
+            Item
+          </th>
+          <th>
+            Price
+          </th>
+          <th
+            aria-label="buttons"
+          >
+             
+          </th>
+        </tr>
+      </thead>
+      <tbody />
+    </table>
+    <div>
+      <button
+        style="margin: 2pt 3pt;"
+      >
+        1
+      </button>
+    </div>
+  </div>
+</div>
+`;

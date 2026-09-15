@@ -21,6 +21,7 @@ exports[`AddShopItemForm > should render correctly 1`] = `
           name="name"
           required=""
           style="width: 80%; css-float: right;"
+          value=""
         />
       </fieldset>
       <fieldset>
@@ -37,6 +38,7 @@ exports[`AddShopItemForm > should render correctly 1`] = `
           name="barcode"
           required=""
           style="width: 80%; css-float: right;"
+          value=""
         />
       </fieldset>
       <fieldset>
@@ -54,6 +56,7 @@ exports[`AddShopItemForm > should render correctly 1`] = `
           name="price"
           required=""
           style="width: 80%; css-float: right;"
+          value=""
         />
       </fieldset>
       <button
