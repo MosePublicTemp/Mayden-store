@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 using var loggerFactory = LoggerFactory.Create(builder => builder.SetMinimumLevel(LogLevel.Trace).AddConsole());
 var logger = loggerFactory.CreateLogger<Program>();
 
+builder.WebHost.UseUrls("https://localhost:80");
 // Add services to the container.
 builder.Services.AddServiceMappings();
 builder.Services.AddControllers();

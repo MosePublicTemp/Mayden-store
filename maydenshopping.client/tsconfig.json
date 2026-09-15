@@ -12,6 +12,7 @@
     "allowImportingTsExtensions": true,
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
